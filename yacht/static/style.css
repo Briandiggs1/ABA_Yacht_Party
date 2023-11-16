@@ -1,0 +1,89 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+#wrapper {
+	width:970px;
+    margin: auto;
+    background-color: #f9f9f9;
+
+}
+
+#header{
+    background-color: aqua;
+    display: flex;
+    height: 30%;
+    align-items: center;
+    justify-content: space-around;
+ 
+}
+
+#name{
+    background-color: plum;
+    padding: 10px;
+
+    
+}
+#title{
+    background-color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+h3{
+    background-color: green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+ 
+}
+h6{
+    background-color: blue;
+    font-family: cursive;
+
+
+ 
+}
+
+#log{
+    background-color: purple;
+    display: flex;
+  
+}
+
+#login_email{
+    padding: 10px;
+}
+
+#login_password{
+    padding: 10px;
+}
+
+#button{
+    padding: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#body{
+    background-color: orange;
+    display: flex;
+    height: 30%;
+    align-items: center;
+    justify-content: space-around;
+ 
+}
+
+#welcome{
+    background-color: palegoldenrod;
+    height: auto;
+}
+
+#register{
+    background-color: blueviolet;
+    height: auto;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     {% load tz %}
+</head>
+<body class="bg-dark">
+    <h1 class="text-white">Welcome {{ this_user.first_name }}!</h1> 
+    <div class="text-end"><a href="/users/{{this_user.id}}"> My Profile</a> <a href="/logout">Logout</a></div>
+    <div class="text-white"><h1 class="text-center">All Black Affair Yacht Party</h1>
+    <h4 class="text-center">BE Diggs 24th Birthday Celebration</h4></div>
+    <div>
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <form action="/post/add" method="POST">
+        {% csrf_token %}
+        <div class="form-floating mb-3" >
+            <input type="text" class="form-control" name="status" value="{{post.status}}" placeholder="Are you ready? Lets hear about it!">
+            <button type="submit" class="btn btn-primary btn-lg">Post!</button> 
+        </div>                    
+        </form>
+    </div>
+    <div>
+        <div class="d-grid gap-3">
+            {% for post in all_post %}
+                <div class="p-2 bg-light border">
+                    <p><a href="/home/{{post.id}}">{{ post.posted_by.first_name }}</a> says: {{ post.status }}</p> 
+                    <p>{{ post.liked.count }} people like this</p>
+                    {% if this_user.id == post.posted_by.id %} <a href="/{{post.id}}/remove">Delete</a> {% endif %}                 
+                    {% if this_user in post.liked.all %}
+                    <a href="/{{post.id}}/like" id='unlike'>Unlike</a>
+                    {% else %}
+                    <a href="/{{post.id}}/like" id='like'>Like</a>
+                    {% endif %}
+                    {% timezone "America/New_York" %}
+                        {{ post.created_at }} EST
+                    {% endtimezone %}
+                </div>  
+            {% endfor %}
+        </div>
+    </div> 
+   <div class="d-grid gap-3">
+        <div class="text-white-50 bg-dark">
+        <div class="border border-warning">
+            <div><h2 class="text-center">Purpose</h2></div>
+            <p class="text-center">The Purcell Alex Pearson Achievement Scholarship is a fund created to honor the exceptional man and fraternity brother, Purcell Alex Pearson. 
+                The scholarship seeks recipients who uphold selflessness, humility, charisma, determination, and an unwavering drive for excellence. Its purpose is to amplify Purcell’s passions for 
+                community development by granting opportunities to first generation college students, and to students who are financially disadvantaged. The scholarship is being created as a general fund. 
+                Once the fund reaches $25,000, it is to become an endowed fund which will allow Purcell Alex Pearson’s legacy and contributions to UW-Whitewater and its surrounding communities to be remembered 
+                and continue for many years to come. By supporting this event, you are helping to make this goal a reality. </p>
+        </div>
+        </div>
+        <div class="text-white-50 bg-dark">
+            <p class="text-center">Stay up to date by following the <a href="https://fb.me/e/1rBtha9W8">Event Page</a> on Facebook!</p>
+        </div>
+    </div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+   
